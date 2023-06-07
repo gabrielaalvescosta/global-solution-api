@@ -6,16 +6,16 @@ import java.util.List;
 
 public class OrganizacaoModel {
 
-    private Long id;
-    private List<AcaoSocial> acaoSocialList;
-    private String status;
-    private String cnpj;
-    private String nomeFantasia;
-    private String estado;
-    private String cidade;
-    private String telefone;
-    private String descricao;
-    private String chavePix;
-    private LocalDateTime dataCadastro;
+    public Long id;
+    public List<AcaoSocial> acaoSocialList;
+    public String status;
+    public String cnpj;
+    public String nomeFantasia;
+    public String estado;
+    public String cidade;
+    public String telefone;
+    public String descricao;
+    public String chavePix;
+    public LocalDateTime dataCadastro;
 
 }

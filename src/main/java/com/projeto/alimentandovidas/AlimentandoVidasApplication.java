@@ -1,6 +1,5 @@
 package com.projeto.alimentandovidas;
 
-import com.projeto.alimentandovidas.entities.AcaoSocial;
 import com.projeto.alimentandovidas.repository.AcaoSocialRepository;
 import com.projeto.alimentandovidas.repository.OrganizacaoRepository;
 import com.projeto.alimentandovidas.repository.UsuarioRepository;
@@ -24,14 +23,11 @@ public class AlimentandoVidasApplication {
 								  OrganizacaoRepository organizacaoRepository,
 								  UsuarioRepository usuarioRepository) {
 		return (args) -> {
-			acaoSocialRepository.save(new AcaoSocial(null, organizacaoRepository.findById(1L).get(), null, null));
+			//acaoSocialRepository.save(new AcaoSocial(null, organizacaoRepository.getOrganizacaoById(or), null, null, null, null, null));
 
-			estoqueRepository.save(new Estoque(null, 1, null, pizzaRepository.findById(1L).get()));
 
-			clienteRepository.save(new Cliente(null, "Leonardo Gasparini", null, null));
-
-			pedidoRepository.save(new Pedido(null, LocalDateTime.now(), pizzaRepository.findById(1L).get(),
-					clienteRepository.findAll().get(0), null));
+		// pedidoRepository.save(new Pedido(null, LocalDateTime.now(), pizzaRepository.findById(1L).get(),
+		//			clienteRepository.findAll().get(0), null));
 
 		};
 	}

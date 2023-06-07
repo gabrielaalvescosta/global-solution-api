@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 public class AcaoSocialModel {
 
-    private Long id;
+    public Long id;
     private Organizacao organizacao;
     private String descricaoCompleta;
     private String local;
