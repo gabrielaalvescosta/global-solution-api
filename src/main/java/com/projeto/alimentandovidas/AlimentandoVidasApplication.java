@@ -10,16 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AlimentandoVidasApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AlimentandoVidasApplication.class, args);
-		try {
-			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("TESTE");
-			EntityManager entityManager = entityManagerFactory.createEntityManager();
+		EntityManagerFactory entityManagerFactory = Persistence.
+				createEntityManagerFactory("ALIMENTANDO-VIDAS");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-			entityManager.close();
-			entityManagerFactory.close();
-		} catch (Exception e) {
-			throw e;
-		}
+		entityManager.close();
+		entityManagerFactory.close();
 	}
 
 }

@@ -1,17 +1,10 @@
 package com.projeto.alimentandovidas.repository;
 
 import com.projeto.alimentandovidas.model.AcaoSocial;
-import com.projeto.alimentandovidas.model.Organizacao;
 import jakarta.persistence.EntityManager;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public class AcaoSocialRepository  {
     private EntityManager entityManager;
 
@@ -19,20 +12,6 @@ public class AcaoSocialRepository  {
     {
         this.entityManager = entityManager;
     }
-
-    public void UpdateAcaoSocial(AcaoSocial acaoSocial)
-    {
-        try{
-            entityManager.getTransaction().begin();
-            entityManager.merge(acaoSocial);
-            entityManager.getTransaction().commit();
-        }
-        catch (Exception e)
-        {
-            entityManager.getTransaction().rollback();
-        }
-    }
-
 
     public List<AcaoSocial> GetAcaoSocial()
     {
@@ -54,6 +33,20 @@ public class AcaoSocialRepository  {
         try{
             entityManager.getTransaction().begin();
             entityManager.persist(acaoSocial);
+            entityManager.getTransaction().commit();
+        }
+        catch (Exception e)
+        {
+            entityManager.getTransaction().rollback();
+        }
+    }
+
+
+    public void UpdateAcaoSocial(AcaoSocial acaoSocial)
+    {
+        try{
+            entityManager.getTransaction().begin();
+            entityManager.merge(acaoSocial);
             entityManager.getTransaction().commit();
         }
         catch (Exception e)

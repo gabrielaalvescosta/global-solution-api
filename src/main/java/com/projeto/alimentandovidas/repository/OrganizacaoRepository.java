@@ -2,13 +2,7 @@ package com.projeto.alimentandovidas.repository;
 
 import com.projeto.alimentandovidas.model.Organizacao;
 import jakarta.persistence.EntityManager;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public class OrganizacaoRepository  {
 
     private EntityManager entityManager;
@@ -55,10 +49,10 @@ public class OrganizacaoRepository  {
         }
     }
 
-    public void deleteCustomer(Customer customer) {
+    public void deleteOrganizacao(Organizacao organizacao) {
         entityManager.getTransaction().begin();
         try {
-            entityManager.remove(customer);
+            entityManager.remove(organizacao);
             entityManager.getTransaction().commit();
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
@@ -66,12 +60,12 @@ public class OrganizacaoRepository  {
         }
     }
 
-    public void deleteCustomerById(int id) {
+    public void deleteOrganizacaoById(int id) {
         entityManager.getTransaction().begin();
         try {
-            Customer customer = entityManager.find(Customer.class, id);
-            if (customer != null) {
-                entityManager.remove(customer);
+            Organizacao organizacao = entityManager.find(Organizacao.class, id);
+            if (organizacao != null) {
+                entityManager.remove(organizacao);
             }
             entityManager.getTransaction().commit();
         } catch (Exception e) {
