@@ -1,7 +1,7 @@
 package com.projeto.alimentandovidas.controller;
 
-import com.projeto.alimentandovidas.model.AcaoSocial;
-import com.projeto.alimentandovidas.model.Organizacao;
+import com.projeto.alimentandovidas.entities.AcaoSocial;
+import com.projeto.alimentandovidas.entities.Organizacao;
 import com.projeto.alimentandovidas.repository.AcaoSocialRepository;
 import com.projeto.alimentandovidas.repository.OrganizacaoRepository;
 import io.swagger.v3.oas.annotations.Operation;

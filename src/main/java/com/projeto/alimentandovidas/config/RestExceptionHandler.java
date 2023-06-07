@@ -3,7 +3,7 @@ package com.projeto.alimentandovidas.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.projeto.alimentandovidas.model.RestValidationError;
+import com.projeto.alimentandovidas.entities.RestValidationError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

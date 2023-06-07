@@ -1,4 +1,4 @@
-package com.projeto.alimentandovidas.model;
+package com.projeto.alimentandovidas.entities;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

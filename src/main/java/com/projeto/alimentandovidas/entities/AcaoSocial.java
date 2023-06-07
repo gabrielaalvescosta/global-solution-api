@@ -1,7 +1,6 @@
-package com.projeto.alimentandovidas.model;
+package com.projeto.alimentandovidas.entities;
 
 import com.projeto.alimentandovidas.controller.AcaoSocialController;
-import com.projeto.alimentandovidas.controller.OrganizacaoController;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 
 import java.time.LocalDate;

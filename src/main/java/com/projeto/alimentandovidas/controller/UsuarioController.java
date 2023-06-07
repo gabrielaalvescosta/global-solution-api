@@ -1,7 +1,7 @@
 package com.projeto.alimentandovidas.controller;
 
-import com.projeto.alimentandovidas.model.Credencial;
-import com.projeto.alimentandovidas.model.Usuario;
+import com.projeto.alimentandovidas.entities.Credencial;
+import com.projeto.alimentandovidas.entities.Usuario;
 import com.projeto.alimentandovidas.repository.UsuarioRepository;
 import com.projeto.alimentandovidas.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;

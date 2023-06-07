@@ -1,4 +1,4 @@
-package com.projeto.alimentandovidas.model;
+package com.projeto.alimentandovidas.entities;
 
 import com.projeto.alimentandovidas.controller.OrganizacaoController;
 import jakarta.persistence.*;

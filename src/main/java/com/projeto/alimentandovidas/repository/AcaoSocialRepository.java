@@ -1,6 +1,6 @@
 package com.projeto.alimentandovidas.repository;
 
-import com.projeto.alimentandovidas.model.AcaoSocial;
+import com.projeto.alimentandovidas.entities.AcaoSocial;
 import jakarta.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;

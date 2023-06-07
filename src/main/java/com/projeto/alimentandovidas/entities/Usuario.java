@@ -1,12 +1,5 @@
-package com.projeto.alimentandovidas.model;
-
-import java.util.Collection;
+package com.projeto.alimentandovidas.entities;
 import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

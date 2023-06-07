@@ -1,4 +1,4 @@
-package com.projeto.alimentandovidas.model;
+package com.projeto.alimentandovidas.entities;
 
 public record RestValidationError(
         Integer code,

@@ -3,9 +3,9 @@ package com.projeto.alimentandovidas.service;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import com.projeto.alimentandovidas.model.Credencial;
-import com.projeto.alimentandovidas.model.Token;
-import com.projeto.alimentandovidas.model.Usuario;
+import com.projeto.alimentandovidas.entities.Credencial;
+import com.projeto.alimentandovidas.entities.Token;
+import com.projeto.alimentandovidas.entities.Usuario;
 import com.projeto.alimentandovidas.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

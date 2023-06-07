@@ -1,6 +1,6 @@
 package com.projeto.alimentandovidas.repository;
 
-import com.projeto.alimentandovidas.model.Organizacao;
+import com.projeto.alimentandovidas.entities.Organizacao;
 import jakarta.persistence.EntityManager;
 
 public class OrganizacaoRepository  {
