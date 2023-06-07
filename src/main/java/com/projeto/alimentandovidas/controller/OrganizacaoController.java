@@ -44,7 +44,7 @@ public class OrganizacaoController {
     )
     public PagedModel<EntityModel<Object>> indexOrganizacoes(@RequestParam(required = false) String estado, @ParameterObject @PageableDefault(size = 5) Pageable pageable){
         Page<Organizacao> organizacoes = (estado == null)?
-                organizacaoRepository.findAll(pageable):
+                organizacaoRepository.getAllOrganizacao():
                 organizacaoRepository.findByEstadoContaining(estado, pageable);
 
         return assembler.toModel(organizacoes.map(Organizacao::toModel));
@@ -57,7 +57,7 @@ public class OrganizacaoController {
     )
     public EntityModel<Organizacao> show(@PathVariable Long id){
         log.info("buscando organizacao com id " + id);
-        var organizacao = organizacaoRepository.findById(id)
+        var organizacao = organizacaoRepository.getOrganizacaoById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.FORBIDDEN, "organizacao não encontrada"));
 
         return organizacao.toModel();

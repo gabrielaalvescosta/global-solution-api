@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Slf4j
@@ -34,11 +35,11 @@ public class AcaoSocialController {
             summary = "Lista de ações sociais de uma organização",
             description = "Retorna todas as ações sociais de uma organização específica"
     )
-    public List<AcaoSocial> indexAcoesSociais(@PathVariable Long id) {
-        Organizacao organizacao = organizacaoRepository.findById(id)
+    public Optional <AcaoSocial> indexAcoesSociais(@PathVariable Long id) {
+        Organizacao organizacao = organizacaoRepository.getOrganizacaoById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Organização não encontrada"));
 
-        List<AcaoSocial> acoesSociais = acaoSocialRepository.findByOrganizacaoId(id);
+        Optional <AcaoSocial> acoesSociais = acaoSocialRepository.GetAcaoSocialById(id);
 
         return acoesSociais;
     }
@@ -51,7 +52,7 @@ public class AcaoSocialController {
     )
     public EntityModel<AcaoSocial> show(@PathVariable Long id) {
         log.info("Buscando ação social com id " + id);
-        AcaoSocial acaoSocial = acaoSocialRepository.findById(id)
+        AcaoSocial acaoSocial = acaoSocialRepository.GetAcaoSocialById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ação social não encontrada"));
 
         return acaoSocial.toModel();

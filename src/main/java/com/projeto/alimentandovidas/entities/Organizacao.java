@@ -8,9 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.hateoas.EntityModel;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Data
 @NoArgsConstructor
@@ -60,4 +64,14 @@ public class Organizacao {
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
+    public EntityModel<Organizacao> toModel() {
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(OrganizacaoController.class).show(id)).withSelfRel()
+        );
+    }
+
+    public void orElseThrow(Object organizacao_não_encontrada) {
+
+    }
 }

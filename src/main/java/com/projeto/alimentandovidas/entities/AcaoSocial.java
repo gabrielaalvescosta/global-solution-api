@@ -8,8 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.hateoas.EntityModel;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @Data
@@ -50,4 +55,12 @@ public class AcaoSocial {
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
+    public EntityModel<AcaoSocial> toModel() {
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(AcaoSocialController.class).show(id)).withSelfRel(),
+                linkTo(methodOn(AcaoSocialController.class).destroy(id)).withRel("delete"),
+                linkTo(methodOn(AcaoSocialController.class).indexAcoesSociais(id)).withRel("acoesSociais")
+        );
+    }
 }

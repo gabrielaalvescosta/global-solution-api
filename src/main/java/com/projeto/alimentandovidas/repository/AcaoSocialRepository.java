@@ -20,7 +20,7 @@ public class AcaoSocialRepository  {
         return query.getResultList();
     }
 
-    public Optional<AcaoSocial> GetAcaoSocialById(int id)
+    public Optional<AcaoSocial> GetAcaoSocialById(long id)
     {
         var jpql = "SELECT a FROM AV_ACAO_SOCIAL a WHERE id=:id";
         var query = entityManager.createQuery(jpql, AcaoSocial.class);

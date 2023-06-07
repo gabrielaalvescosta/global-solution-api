@@ -1,7 +1,10 @@
 package com.projeto.alimentandovidas.repository;
 
+import com.projeto.alimentandovidas.entities.AcaoSocial;
 import com.projeto.alimentandovidas.entities.Organizacao;
 import jakarta.persistence.EntityManager;
+
+import java.util.Optional;
 
 public class OrganizacaoRepository  {
 
@@ -19,13 +22,23 @@ public class OrganizacaoRepository  {
         return organizacoes;
     }
 
-    public Organizacao getOrganizacaoById(int id) {
+    public Organizacao getOrganizacaoById(long id) {
         Organizacao organizacao = entityManager.find(Organizacao.class, id);
         if (organizacao == null) {
             return null;
         }
         return organizacao;
     }
+
+    public Optional<AcaoSocial> getOrganizacaoByState(String estado)
+    {
+        var jpql = "SELECT a FROM AV_ACAO_SOCIAL a WHERE estado =:estado";
+        var query = entityManager.createQuery(jpql, AcaoSocial.class);
+        query.setParameter("estado", estado);
+        var acaoSocial = query.getSingleResult();
+        return Optional.ofNullable(acaoSocial);
+    }
+
 
     public void insertOrganizacao(Organizacao organizacao) {
         try {

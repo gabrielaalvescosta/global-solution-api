@@ -23,11 +23,20 @@ public class UsuarioRepository {
         return query.getResultList();
     }
 
-    public Optional<Usuario> GetUsuarioById(int id)
+    public Optional<Usuario> GetUsuarioById(long id)
     {
         var jpql = "SELECT u FROM AV_USUARIO u WHERE id=:id";
         var query = entityManager.createQuery(jpql, Usuario.class);
         query.setParameter("id",id);
+        var usuario = query.getSingleResult();
+        return Optional.ofNullable(usuario);
+    }
+
+    public Optional<Usuario> GetUsuarioByEmail(String email)
+    {
+        var jpql = "SELECT u FROM AV_USUARIO u WHERE email=:email";
+        var query = entityManager.createQuery(jpql, Usuario.class);
+        query.setParameter("email", email);
         var usuario = query.getSingleResult();
         return Optional.ofNullable(usuario);
     }
@@ -58,7 +67,7 @@ public class UsuarioRepository {
         }
     }
 
-    public void deleteUsuarioById(int id) {
+    public void deleteUsuarioById(long id) {
         AcaoSocial acaoSocial = entityManager.find(AcaoSocial.class, id);
         entityManager.getTransaction().begin();
         try {

@@ -43,7 +43,7 @@ public class TokenService {
                 .getSubject()
                 ;
 
-        return usuarioRepository.findByEmail(email)
+        return usuarioRepository.GetUsuarioByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
 
