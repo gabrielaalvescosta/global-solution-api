@@ -2,7 +2,7 @@
 <br>
 O projeto "Alimentando Vidas" é um projeto solidário que visa combater a fome por meio da disponibilização de informações sobre organizações e ações sociais. Essa iniciativa tem como objetivo fornecer acesso fácil e rápido a uma lista de organizações que atuam no combate à fome, permitindo que as pessoas conheçam mais sobre essas organizações e suas respectivas ações sociais.
 
-![uml](https://github.com/gabrielaaalvescosta/global-solution-api/img/uml.png)
+![uml](img/uml.png)
 
 ### Alguns exemplos de Ações que podem ser divulgadas:
 
