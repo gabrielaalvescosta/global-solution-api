@@ -60,7 +60,7 @@ public class OrganizacaoRepository  {
             query.setParameter("id", organizacao.getId());
             query.setParameter("acaoSocialList", organizacao.getAcaoSocialList());
             query.setParameter("status", organizacao.getStatus());
-            query.setParameter("cnpj", organizacao.getCnpj();
+            query.setParameter("cnpj", organizacao.getCnpj());
             query.setParameter("nomeFantasia", organizacao.getNomeFantasia());
             query.setParameter("site", organizacao.getSite());
             query.setParameter("estado", organizacao.getEstado());

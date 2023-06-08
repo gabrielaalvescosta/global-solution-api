@@ -57,6 +57,30 @@ public class AcaoSocialRepository  {
             throw e;
         }
     }
+    public void insertAcaoSocial(AcaoSocial acaoSocial) {
+        String jpql = "UPDATE AV_ACAO_SOCIAL a SET a.descricaoCompleta = :descricaoCompleta, a.local = :local, " +
+                "a.horarioFuncionamento = :horarioFuncionamento, a.dataInicio = :dataInicio, a.dataFim = :dataFim, " +
+                "a.publicoPermitido = :publicoPermitido, a.dataCadastro = :dataCadastro";
+
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter("descricaoCompleta", acaoSocial.getDescricaoCompleta());
+        query.setParameter("local", acaoSocial.getLocal());
+        query.setParameter("horarioFuncionamento", acaoSocial.getHorarioFuncionamento());
+        query.setParameter("dataInicio", acaoSocial.getDataInicio());
+        query.setParameter("dataFim", acaoSocial.getDataFim());
+        query.setParameter("publicoPermitido", acaoSocial.getPublicoPermitido());
+        query.setParameter("dataCadastro", LocalDateTime.now());
+
+        entityManager.getTransaction().begin();
+        try {
+            query.executeUpdate();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw e;
+        }
+    }
+
 
     public void updateAcaoSocialPorIdOrganizacao(AcaoSocial acaoSocial, Long organizacaoId) {
         String jpql = "UPDATE AV_ACAO_SOCIAL a SET a.descricaoCompleta = :descricaoCompleta, a.local = :local, " +
@@ -84,11 +108,28 @@ public class AcaoSocialRepository  {
         }
     }
 
-    public void deleteAcaoSocialPorIdOrganizacao(Long organizacaoId) {
+    public void deleteAcaoSocialPorIdOrganizacao(Long id, Long organizacaoId) {
+        String jpql = "DELETE FROM AV_ACAO_SOCIAL a WHERE a.id = :acaoSocialId AND a.organizacao.id = :organizacaoId";
+
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter("id", id);
+        query.setParameter("organizacaoId", organizacaoId);
+
+        entityManager.getTransaction().begin();
+        try {
+            query.executeUpdate();
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            entityManager.getTransaction().rollback();
+            throw e;
+        }
+    }
+
+    public void deleteAcaoSocialById(Long id) {
         String jpql = "DELETE FROM AV_ACAO_SOCIAL a WHERE a.organizacao.id = :organizacaoId";
 
         Query query = entityManager.createQuery(jpql);
-        query.setParameter("organizacaoId", organizacaoId);
+        query.setParameter("organizacaoId", id);
 
         entityManager.getTransaction().begin();
         try {

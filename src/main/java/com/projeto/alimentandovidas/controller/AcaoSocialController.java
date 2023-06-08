@@ -35,11 +35,8 @@ public class AcaoSocialController {
             description = "Retorna todas as ações sociais de uma organização específica"
     )
     public Optional <AcaoSocial> indexAcoesSociais(@PathVariable Long id) {
-        Organizacao organizacao = organizacaoRepository.getOrganizacaoById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Organização não encontrada"));
-
+        Organizacao organizacao = organizacaoRepository.getOrganizacaoById(id);
         Optional <AcaoSocial> acoesSociais = acaoSocialRepository.GetAcaoSocialById(id);
-
         return acoesSociais;
     }
 
@@ -69,12 +66,11 @@ public class AcaoSocialController {
     public ResponseEntity<Object> create(@RequestBody @Valid AcaoSocial acaoSocial) {
         log.info("Realizando cadastro da ação social: " + acaoSocial);
 
-        Organizacao organizacao = organizacaoRepository.getOrganizacaoById(acaoSocial.getOrganizacao().getId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Organização não encontrada"));
+        Organizacao organizacao = organizacaoRepository.getOrganizacaoById(acaoSocial.getOrganizacao().getId());
 
         acaoSocial.setOrganizacao(organizacao);
         acaoSocial.setDataCadastro(LocalDateTime.now());
-        acaoSocialRepository.save(acaoSocial);
+        acaoSocialRepository.insertAcaoSocial(acaoSocial);
 
         return ResponseEntity
                 .created(acaoSocial.toModel().getRequiredLink("self").toUri())
@@ -94,7 +90,7 @@ public class AcaoSocialController {
 
         acaoSocial.setId(id);
         acaoSocial.setDataCadastro(acaoSocialAnterior.getDataCadastro());
-        acaoSocialRepository.save(acaoSocial);
+        acaoSocialRepository.updateAcaoSocialPorIdOrganizacao(acaoSocial, id);
 
         return acaoSocial.toModel();
     }
@@ -107,10 +103,8 @@ public class AcaoSocialController {
     public ResponseEntity<Object> destroy(@PathVariable Long id) {
         log.info("Excluindo ação social com id " + id);
 
-        AcaoSocial acaoSocial = acaoSocialRepository.GetAcaoSocialById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ação social não encontrada"));
-
-        acaoSocialRepository.delete(acaoSocial);
+        var acaoSocial = acaoSocialRepository.GetAcaoSocialById(id);
+        acaoSocialRepository.deleteAcaoSocialById(acaoSocial.get().getId());
 
         return ResponseEntity.noContent().build();
     }
