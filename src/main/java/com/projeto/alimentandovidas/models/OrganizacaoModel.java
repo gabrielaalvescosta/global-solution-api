@@ -11,6 +11,8 @@ public class OrganizacaoModel {
     public String status;
     public String cnpj;
     public String nomeFantasia;
+
+    public String site;
     public String estado;
     public String cidade;
     public String telefone;

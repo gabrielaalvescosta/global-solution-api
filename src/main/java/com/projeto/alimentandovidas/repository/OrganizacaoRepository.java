@@ -3,6 +3,8 @@ package com.projeto.alimentandovidas.repository;
 import com.projeto.alimentandovidas.entities.AcaoSocial;
 import com.projeto.alimentandovidas.entities.Organizacao;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 
 import java.util.Optional;
 
@@ -32,11 +34,15 @@ public class OrganizacaoRepository  {
 
     public Optional<AcaoSocial> getOrganizacaoByState(String estado)
     {
-        var jpql = "SELECT a FROM AV_ACAO_SOCIAL a WHERE estado =:estado";
-        var query = entityManager.createQuery(jpql, AcaoSocial.class);
+        String jpql = "SELECT a FROM AcaoSocial a WHERE a.estado = :estado";
+        TypedQuery<AcaoSocial> query = entityManager.createQuery(jpql, AcaoSocial.class);
         query.setParameter("estado", estado);
-        var acaoSocial = query.getSingleResult();
-        return Optional.ofNullable(acaoSocial);
+        try {
+            AcaoSocial acaoSocial = query.getSingleResult();
+            return Optional.ofNullable(acaoSocial);
+        } catch (NoResultException e) {
+            return Optional.empty();
+        }
     }
 
 

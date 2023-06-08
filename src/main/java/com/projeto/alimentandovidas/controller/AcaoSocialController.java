@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -70,7 +69,7 @@ public class AcaoSocialController {
     public ResponseEntity<Object> create(@RequestBody @Valid AcaoSocial acaoSocial) {
         log.info("Realizando cadastro da ação social: " + acaoSocial);
 
-        Organizacao organizacao = organizacaoRepository.findById(acaoSocial.getOrganizacao().getId())
+        Organizacao organizacao = organizacaoRepository.getOrganizacaoById(acaoSocial.getOrganizacao().getId())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Organização não encontrada"));
 
         acaoSocial.setOrganizacao(organizacao);
@@ -90,7 +89,7 @@ public class AcaoSocialController {
     public EntityModel<AcaoSocial> update(@PathVariable Long id, @RequestBody @Valid AcaoSocial acaoSocial) {
         log.info("Alterando ação social com id " + id);
 
-        AcaoSocial acaoSocialAnterior = acaoSocialRepository.findById(id)
+        AcaoSocial acaoSocialAnterior = acaoSocialRepository.GetAcaoSocialById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ação social não encontrada"));
 
         acaoSocial.setId(id);
@@ -108,7 +107,7 @@ public class AcaoSocialController {
     public ResponseEntity<Object> destroy(@PathVariable Long id) {
         log.info("Excluindo ação social com id " + id);
 
-        AcaoSocial acaoSocial = acaoSocialRepository.findById(id)
+        AcaoSocial acaoSocial = acaoSocialRepository.GetAcaoSocialById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ação social não encontrada"));
 
         acaoSocialRepository.delete(acaoSocial);
