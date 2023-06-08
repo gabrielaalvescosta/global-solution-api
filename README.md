@@ -1,10 +1,17 @@
 # AlimentandoVidas
 <br>
-O projeto "Alimentando Vidas" é um projeto solidário que visa combater a fome por meio da disponibilização de informações sobre organizações e ações sociais. Essa iniciativa tem como objetivo fornecer acesso fácil e rápido a uma lista de organizações que atuam no combate à fome, permitindo que as pessoas conheçam mais sobre essas organizações e suas respectivas ações sociais.
-## Uml do Projeto
+O projeto "Alimentando Vidas" é um projeto solidário que visa combater a fome por meio da disponibilização de informações sobre organizações e ações sociais. Essa iniciativa tem como objetivo fornecer acesso fácil e rápido a uma lista de organizações que atuam no combate à fome, permitindo que as pessoas conheçam mais sobre essas organizações e suas respectivas ações sociais. 
+
+<h3>Uml do Projeto</h3>
 <center>
 <img src="img/uml.png" alt="uml"/> 
 </center>
+
+<h3>Integrantes</h3>
+96051 - Gabriela Silva Alves Costa
+96056 – Guilherme da Silva Nascimento
+96261 - Jaqueline Santana da Rocha
+94305 - Milena Vitoria da Silva Goes
 
 ## Diagrama de Entidades e Relacionamentos
 
