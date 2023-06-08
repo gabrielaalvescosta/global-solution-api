@@ -8,10 +8,12 @@ O projeto "Alimentando Vidas" é um projeto solidário que visa combater a fome 
 </center>
 
 <h3>Integrantes</h3>
-96051 - Gabriela Silva Alves Costa
-96056 – Guilherme da Silva Nascimento
-96261 - Jaqueline Santana da Rocha
-94305 - Milena Vitoria da Silva Goes
+<ul>
+  <li>96051 - Gabriela Silva Alves Costa</li>
+  <li>96056 – Guilherme da Silva Nascimento</li>
+  <li>96261 - Jaqueline Santana da Rocha</li>
+  <li>94305 - Milena Vitoria da Silva Goes</li>
+</ul>
 
 ## Diagrama de Entidades e Relacionamentos
 
