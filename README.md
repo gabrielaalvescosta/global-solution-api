@@ -55,8 +55,8 @@ Para instalar e executar a API Alimentando Vidas localmente, siga os passos abai
 - Certifique-se de ter o Java Development Kit (JDK) e o Maven instalado em sua máquina. A versão recomendada para JDK é a JDK 11 ou superior.
 - Faça o clone do repositório aqui no github.
 - Navegue até o diretório clonado por meio do terminal ou prompt de comando.
-- Compile o projeto executando o seguinte comando: ./mvnw clean install.
-- Após a compilação, execute a API com o comando: ./mvnw spring-boot:run.
+- Compile o projeto executando o seguinte comando: ./mvnw clean install
+- Após a compilação, execute a API com o comando: ./mvnw spring-boot:run
 
 ### Procedimento de Testes
 Para testar os recursos JSON e endpoints da API Alimentando Vidas, utilize o swagger através do http://localhost:8080/swagger-ui/index.html#/ para enviar requisições HTTP para a API.
@@ -66,3 +66,18 @@ Para testar os recursos JSON e endpoints da API Alimentando Vidas, utilize o swa
 ![endpoints](https://github.com/Jakeline-xx/AlimentandoVidas/blob/main/endpoints.png?raw=true)
 
 
+### Autenticação 
+
+Alguns endpoints necessitam de autenticação para obter acesso. Para isso, faça primeiro o registro e depois faça o login para gerar o token jwt. Para deixar o token fixado no header, vá no botão Authorize e insira o token gerado, conforme passo a passo abaixo:
+
+![autenticacao](https://github.com/Jakeline-xx/AlimentandoVidas/blob/main/autenticacao.png?raw=true)
+
+Exemplo de requisição que necessita de autenticação.
+
+Sem autenticar:
+![nok](https://github.com/Jakeline-xx/AlimentandoVidas/blob/main/nok.png?raw=true)
+
+Autenticado e persistindo os dados:
+![ok](https://github.com/Jakeline-xx/AlimentandoVidas/blob/main/ok.png?raw=true)
+
+# Atenção: o Token possui um tempo de expiração! quando expirado, gerar token novamente através do login.
