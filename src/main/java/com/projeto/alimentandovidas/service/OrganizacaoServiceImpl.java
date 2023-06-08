@@ -31,9 +31,7 @@ public class OrganizacaoServiceImpl implements OrganizacaoService {
         organizacao.setNomeFantasia(organizacaoModel.nomeFantasia);
         organizacao.setSite(organizacaoModel.site);
         organizacao.setTelefone(organizacaoModel.telefone);
-        organizacao.setPizza(pizzaRepository.getReferenceById(model.idpizza));
-        pedido.setCliente(clienteRepository.getReferenceById(UUID.fromString(model.idCliente)));
-        pedidoRepository.save(pedido);
+        organizacaoRepository.insertOrganizacao(organizacao);
     }
 
     @Override

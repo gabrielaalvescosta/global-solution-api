@@ -71,7 +71,5 @@ public class Organizacao {
         );
     }
 
-    public void orElseThrow(Object organizacao_não_encontrada) {
 
-    }
 }

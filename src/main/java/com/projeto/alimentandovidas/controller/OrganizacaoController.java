@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,11 @@ import org.springframework.web.server.ResponseStatusException;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.reactive.WebFluxLinkBuilder.linkTo;
 
 @RestController
 @Slf4j
@@ -42,12 +48,20 @@ public class OrganizacaoController {
             summary = "Lista de organizações",
             description = "Retorna uma lista paginada de todas organizações, ou apenas com mesmo estado"
     )
-    public PagedModel<EntityModel<Object>> indexOrganizacoes(@RequestParam(required = false) String estado, @ParameterObject @PageableDefault(size = 5) Pageable pageable){
-        Page<Organizacao> organizacoes = (estado == null)?
-                organizacaoRepository.getAllOrganizacao():
-                organizacaoRepository.findByEstadoContaining(estado, pageable);
+    public ResponseEntity<List<EntityModel<Organizacao>>> indexOrganizacoes() {
+        List<Organizacao> organizacoes = organizacaoRepository.getAllOrganizacao();
 
-        return assembler.toModel(organizacoes.map(Organizacao::toModel));
+        if (organizacoes.isEmpty()) {
+            log.info("Nenhuma organização encontrada.");
+            return ResponseEntity.noContent().build();
+        }
+
+        List<EntityModel<Organizacao>> entityModels = organizacoes.stream()
+                .map(organizacao -> EntityModel.of(organizacao,
+                        (Iterable<Link>) linkTo(methodOn(OrganizacaoController.class).show(organizacao.getId())).withSelfRel()))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(entityModels);
     }
 
     @GetMapping("/organizacao/{id}")
@@ -57,9 +71,7 @@ public class OrganizacaoController {
     )
     public EntityModel<Organizacao> show(@PathVariable Long id){
         log.info("buscando organizacao com id " + id);
-        var organizacao = organizacaoRepository.getOrganizacaoById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.FORBIDDEN, "organizacao não encontrada"));
-
+        var organizacao = organizacaoRepository.getOrganizacaoById(id);
         return organizacao.toModel();
     }
 
@@ -76,7 +88,7 @@ public class OrganizacaoController {
         log.info("realizando cadastro da organizacao: " + organizacao);
         organizacao.setStatus("ATIVO");
         organizacao.setDataCadastro(LocalDateTime.now());
-        organizacaoRepository.save(organizacao);
+        organizacaoRepository.insertOrganizacao(organizacao);
         return ResponseEntity
                 .created(organizacao.toModel().getRequiredLink("self").toUri())
                 .body(organizacao.toModel());
@@ -89,8 +101,7 @@ public class OrganizacaoController {
     )
     public EntityModel<Organizacao> update(@PathVariable Long id, @RequestBody @Valid Organizacao organizacao){
         log.info("alterando organizacao com id " + id);
-        Organizacao organizacaoExistente = organizacaoRepository.findById(id)
-                .orElseThrow(() -> new RestNotFoundException("organizacao não encontrada"));
+        Organizacao organizacaoExistente = organizacaoRepository.getOrganizacaoById(id);
 
         if (!organizacaoExistente.getCnpj().equals(organizacao.getCnpj())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "O CNPJ não pode ser alterado");
@@ -99,7 +110,7 @@ public class OrganizacaoController {
         organizacao.setStatus("ATIVO");
         organizacao.setDataCadastro(organizacaoExistente.getDataCadastro());
         organizacao.setId(id);
-        organizacaoRepository.save(organizacao);
+        organizacaoRepository.insertOrganizacao(organizacao);
 
         return organizacao.toModel();
     }
